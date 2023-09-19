@@ -1,4 +1,13 @@
 package me.dio.credit.application.system.controller
+package me.dio.credit.application.system.repository
+
+import me.dio.credit.application.system.entity.Customer
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.stereotype.Repository
+
+@Repository
+interface CustomerRepository: JpaRepository<Customer, Long>
+
 
 import jakarta.validation.Valid
 import me.dio.credit.application.system.dto.request.CustomerDto
@@ -43,3 +52,11 @@ class CustomerResource(
     return ResponseEntity.status(HttpStatus.OK).body(CustomerView(customerUpdated))
   }
 }
+
+package me.dio.credit.application.system.controller
+
+@RestController
+@RequestMapping("/api/customers")
+class CustomerResource(
+  private val customerService: CustomerService
+) 
